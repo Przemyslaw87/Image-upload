@@ -17,7 +17,6 @@ class Images(models.Model):
         img.thumbnail((self.width, self.height))
         self.width = img.width
         self.height = img.height
-        self.save()
         img.save(self.image_url.path)
 
 
