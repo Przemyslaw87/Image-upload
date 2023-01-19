@@ -1,11 +1,11 @@
 from rest_framework import serializers
-from .models import Image
+from .models import Images
 
-class ImageSerializer(serializers.ModelSerializer):
+class ImagesSerializer(serializers.ModelSerializer):
 
     image_url = serializers.ImageField(required=False)
 
     class Meta:
-        model = Image
+        model = Images
         fields = ['id', 'title', 'width', 'height', 'image_url']
 
