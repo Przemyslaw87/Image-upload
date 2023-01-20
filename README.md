@@ -1,3 +1,25 @@
+# About
+
+
+**File name**
+
+As a safeguard against overwriting files on AWS S3, I used the object ID as the file name. I saved the original file name in a separate field. 
+
+
+**Resizing Foto**
+
+For resizing, I chose the scaling option because it transforms the photo better.  I return the length and width after scaling.
+
+
+**Filtering**
+
+I changed genric filtering to custom to look for the string contained in the title.
+
+**Swagger Documentation**
+
+I have added Swagger documentation is available at url : swagger-ui/
+
+
 # Docker Compose
 
 This project uses Docker Compose to manage the development environment. You can use Docker Compose to build the images, create the containers, and run the project. Building the Images
