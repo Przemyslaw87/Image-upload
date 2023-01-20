@@ -7,5 +7,8 @@ class ImagesSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Images
-        fields = ['id', 'title', 'width', 'height', 'image_url']
+        fields = ['id', 'title','orginal_name_file', 'width', 'height', 'image_url']
+        extra_kwargs = {
+            'orginal_name_file': {'read_only': True}
+        }
 
