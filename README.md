@@ -1,4 +1,5 @@
-Docker Compose
+# Docker Compose
+
 This project uses Docker Compose to manage the development environment. You can use Docker Compose to build the images, create the containers, and run the project. Building the Images
 
 To build the images, you'll first need to have Docker and Docker Compose installed. Once that's done, navigate to the root directory of the project where the docker-compose.yml file is located, and run the following command:
@@ -39,3 +40,4 @@ or
 $ docker-compose exec web python manage.py createsuperuser
 ```
 Docker Compose is a powerful tool that makes it easy to manage the development environment, and allows you to easily build, run, and test your project with minimal setup.
+
