@@ -1,8 +1,9 @@
+from django_filters import rest_framework as filters
+from rest_framework import viewsets
+from rest_framework.parsers import FormParser, MultiPartParser
+
 from .models import Images
 from .serializers import ImagesSerializer
-from rest_framework import viewsets
-from rest_framework.parsers import MultiPartParser, FormParser
-from django_filters import rest_framework as filters
 
 
 class ImagesFilter(filters.FilterSet):
@@ -14,10 +15,11 @@ class ImagesFilter(filters.FilterSet):
     Attributes:
         title (CharFilter): A filter that searches for images whose title contains a certain string.
     """
+
     title = filters.CharFilter(lookup_expr="icontains")
 
     class Meta:
-        fields = ('title')
+        fields = "title"
 
 
 class ImagesViewSet(viewsets.ModelViewSet):
@@ -34,10 +36,11 @@ class ImagesViewSet(viewsets.ModelViewSet):
         filterset_class (ImagesFilter): The filterset class to be used for the viewset.
         parser_classes (MultiPartParser, FormParser): The parser classes to be used for the viewset.
     """
-    queryset = Images.objects.order_by('id')
+
+    queryset = Images.objects.order_by("id")
     serializer_class = ImagesSerializer
     filterset_class = ImagesFilter
     parser_classes = (MultiPartParser, FormParser)
 
     def perform_create(self, serializer):
-        serializer.save()
+        serializer.save_and_upload()

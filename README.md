@@ -3,7 +3,7 @@
 
 **File name**
 
-As a safeguard against overwriting files on AWS S3, I used the object ID as the file name. I saved the original file name in a separate field. 
+As a safeguard against overwriting files on AWS S3, I used the uuid object as the file name. I saved the original file name in a separate field. 
 
 
 **Resizing Foto**
@@ -19,6 +19,9 @@ I changed genric filtering to custom to look for the string contained in the tit
 
 I have added Swagger documentation is available at url : swagger-ui/
 
+**Testing**
+
+For testing, in addition to the basic configurations of Django Storage , I also added a contender from Minio. During the tests, I do not use S3 but save the images on Minio, which allows me to check the whole process.
 
 # Docker Compose
 

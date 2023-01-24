@@ -1,7 +1,8 @@
+from io import BytesIO
+import uuid
+from django.core.files.storage import default_storage
 from django.db import models
 from PIL import Image
-from django.core.files.storage import default_storage
-from io import BytesIO
 
 
 class Images(models.Model):
@@ -15,13 +16,14 @@ class Images(models.Model):
         height (int): The height of the image in pixels.
         image_url (ImageField): The URL of the image file.
     """
+
     title = models.CharField(max_length=80, blank=False, null=False)
-    original_name_file = models.TextField(default='example_image')
+    original_name_file = models.TextField(default="example_image")
     width = models.IntegerField()
     height = models.IntegerField()
     image_url = models.ImageField()
 
-    def upload_resize(self):
+    def _upload_resize(self):
         """
         Resizes the image file associated with the current instance of the Images model and updates the width, height,
          and original file name fields.
@@ -34,7 +36,7 @@ class Images(models.Model):
         img = Image.open(self.image_url)
         img.thumbnail((self.width, self.height))
         img.save(memfile, img.format)
-        file_name = f'{self.id}.{img.format.lower()}'
+        file_name = f"{uuid.uuid4()}.{img.format.lower()}"
         default_storage.save(file_name, memfile)
         self.original_name_file = self.image_url
         self.width = img.width
@@ -42,9 +44,9 @@ class Images(models.Model):
         self.image_url = file_name
         memfile.close()
         img.close()
-        super().save()
 
-    def save(self, *args, **kwargs):
+
+    def save_and_upload(self, *args, **kwargs):
         """
         Saves the current instance of the Images model to the database and calls the upload_resize method to resize the
         image file.
@@ -52,5 +54,6 @@ class Images(models.Model):
         This method overrides the default save method of the Model class and calls the upload_resize method to resize
         the image file before saving the instance to the database.
         """
+
+        self._upload_resize()
         super().save(*args, **kwargs)
-        self.upload_resize()

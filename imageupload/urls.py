@@ -4,6 +4,6 @@ from imageupload.views import ImagesViewSet
 
 router = SimpleRouter()
 
-router.register('images', ImagesViewSet, basename='images')
+router.register("images", ImagesViewSet, basename="images")
 
 urlpatterns = router.urls
