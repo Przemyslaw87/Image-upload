@@ -45,6 +45,10 @@ class ImagesModelsTests(TestCase):
 
     @pytest.mark.usefixtures("minio_settings","delete_image_from_minio")
     def test_create_image_success_ok_fields(self):
+        """
+            Test that creating an image with valid fields and saving it to minio
+            results in a successful creation and the image's fields match the expected values.
+        """
         current_directory = os.path.dirname(os.path.abspath(__file__))
         image_path = os.path.join(current_directory, "foto.jpg")
         with open(image_path, "rb") as f:
